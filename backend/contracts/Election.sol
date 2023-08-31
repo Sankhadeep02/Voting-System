@@ -92,12 +92,12 @@ contract Election {
     }
     //function to vote and check for double voting
 
-    function vote(uint8 candidateID,string e) public {
+    function vote(uint8 candidateID,string voterId) public {
 
         //if false the vote will be registered
-        require(!voters[e].voted, "Error:You cannot double vote");
+        require(!voters[voterId].voted, "Error:You cannot double vote");
         
-        voters[e] = Voter (candidateID,true); //add the values to the mapping
+        voters[voterId] = Voter (candidateID,true); //add the values to the mapping
         numVoters++;
         candidates[candidateID].voteCount++; //increment vote counter of candidate
         
