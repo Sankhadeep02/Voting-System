@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "assert": "^2.1.0",
+    "fs-extra": "^11.1.1",
+    "solc": "^0.8.21",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "web3": "^4.1.1"
+  }
+}
