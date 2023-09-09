@@ -14,7 +14,8 @@ contract ElectionFact {
     mapping(string=>ElectionDet) companyElection;
     
     function createElection(string memory electionId,string memory election_name, string memory election_description) public{
-        address newElection = new Election(msg.sender , election_name, election_description);
+        //address newElection = new Election(msg.sender , election_name, election_description);
+        address newElection = new Election();
         
      companyElection[electionId].deployedAddress = newElection;
      companyElection[electionId].el_n = election_name;
@@ -37,13 +38,25 @@ contract Election {
     string election_name;
     string election_description;
     bool status;
+    bool private initialized;
     
     //election_authority's address taken when it deploys the contract
-    constructor(address authority , string name, string description) public {
+    // constructor(address authority , string name, string description) public {
+    //     election_authority = authority;
+    //     election_name = name;
+    //     election_description = description;
+    //     status = true;
+    // }
+
+    // Initialization function that sets the contract's state variables
+    function initialize(address authority, string memory name, string memory description) public {
+        require(!initialized, "Error: Contract already initialized.");
+        require(msg.sender == authority, "Error: Only the election authority can initialize the contract.");
         election_authority = authority;
         election_name = name;
         election_description = description;
         status = true;
+        initialized = true;
     }
 
     //Only election_authority can call this function
